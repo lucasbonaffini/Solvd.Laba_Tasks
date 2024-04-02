@@ -72,25 +72,25 @@ String.prototype.divide = function (string) {
         return "Error: Subtraction requires valid positive integers as input";
     }
     
-    let dividend = parseInt(this)
-    let divisor = parseInt(string)
+    let dividend = BigInt(this)
+    let divisor = BigInt(string)
 
-    if(divisor === 0) {
+    if(divisor === 0n) {
         return "Error: Division by zero error"
     }
 
-    if(dividend % divisor !== 0) {
+    if(dividend % divisor !== 0n) {
         return "Error: Division should only result in an integer value"
     }
 
     let quotient = "";
-    let partialDividend = 0;
+    let partialDividend = 0n;
 
     for(let i = 0; i < this.length; i++) {
-        partialDividend = partialDividend * 10 + parseInt(this[i]);
-        let currentQuotient = Math.floor(partialDividend / divisor);
+        partialDividend = partialDividend * 10n + BigInt(this[i]);
+        let currentQuotient = partialDividend / divisor;
         
-        if (currentQuotient === 0 && quotient === "") {
+        if (currentQuotient === 0n && quotient === "") {
             quotient += "";
         } else {
             quotient += currentQuotient.toString();
@@ -139,8 +139,10 @@ String.prototype.multiply = function (string) {
 
 }
 
+const rand1 = '44444444444444444444000000'
+const rand2 = '100000'
 
 console.log("602".plus("1230495"));
 console.log("300".minus("10"));
-console.log("10".divide("2"));
+console.log(rand1.divide(rand2));
 console.log("8".multiply("4"));
