@@ -12,6 +12,8 @@ Your task is to implement arithmetic operations on strings without relying on bi
 - For subtraction, ensure that the first parameter is always greater than the second parameter.
 - Division should only result in an integer value.
 
+------------------------------------------------------------------------
+
 - Homework 2
 Deadline: 15 April
 *Task:*
