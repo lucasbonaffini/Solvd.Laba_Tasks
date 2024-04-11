@@ -13,7 +13,11 @@ try {
         throw new Error('stringifyValue did not return a string');
     }
 
-    console.log(AdvanceDataTransf.invertBoolean('false'));
+    console.log(AdvanceDataTransf.invertBoolean(false));
+
+    console.log(AdvanceDataTransf.convertToNumber('20'));
+
+    console.log(AdvanceDataTransf.titleCaseString('hello world'))
    
 } catch (error) {
     console.error(error.message);
