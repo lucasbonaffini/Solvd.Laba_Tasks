@@ -4,7 +4,7 @@
   "main": "Homework_2.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Lucas Bonaffini",
   "license": "ISC",
