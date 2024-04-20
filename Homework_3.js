@@ -195,3 +195,50 @@ console.log(power(2, 3));
 
 // * Task 5: Lazy Evaluation and Generators (*do not use yield)
 
+// lazyMap
+
+function lazyMap(array, mappingFunction) {
+    let index = 0;
+  
+    return {
+      next: function() {
+        if (index < array.length) {
+          return { value: mappingFunction(array[index++]), done: false };
+        } else {
+          return { done: true };
+        }
+      }
+    };
+  }
+  
+  const numbers = [1, 2, 3, 4, 5];
+  const squareGenerator = lazyMap(numbers, x => x ** 2);
+  
+  console.log(squareGenerator.next().value); 
+  console.log(squareGenerator.next().value);
+  console.log(squareGenerator.next().value);
+
+
+// fibonacciGenerator
+
+function fibonacciGenerator() {
+    let a = 0, b = 1;
+  
+    return {
+      next: function() {
+        const current = a;
+        a = b;
+        b = current + b;
+        return { value: current, done: false };
+      }
+    };
+  }
+  
+  
+  const generator = fibonacciGenerator();
+  console.log(generator.next().value);
+  console.log(generator.next().value); 
+  console.log(generator.next().value);
+  console.log(generator.next().value);
+  console.log(generator.next().value);
+  console.log(generator.next().value);
