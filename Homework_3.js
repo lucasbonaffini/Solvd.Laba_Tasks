@@ -67,38 +67,41 @@ console.log(composedFunction(lucas));
 
 // filterUniqueWords
 
-const tokenize = text =>  text.match(/\b\w[\w']*\b/g);
+const tokenize = text => text.match(/\b\w[\w']*\b/g);
 
 const filterUnique = words => [...new Set(words)];
 
 const sortAlphabetically = words => words.sort((a, b) => a.localeCompare(b));
 
-const filterUniqueWords = text => sortAlphabetically(filterUnique(tokenize(text)));
+const filterUniqueWords = text => {
+  const normalizedWords = tokenize(text).map(word => word.toLowerCase());
+  return sortAlphabetically(filterUnique(normalizedWords));
+};
 
-const text = "This is a sample text. This sample text has some duplicate words"
+const text = "This is a sample text. this sample text has some duplicate words";
 
 console.log(filterUniqueWords(text));
+
 
 // getAverageGrade
 
 const calculateAverage = numbers => {
-    if(numbers.length === 0) {
-        return 0;
+    if (numbers.length === 0) {
+      return 0;
     }
-
+    
     const sum = numbers.reduce((acc, num) => acc + num, 0);
     return sum / numbers.length;
-}
-
-const extractGrades = students => students.map(student => student.grades)
-
-const flatten = arrays => [].concat(...arrays);
-
-const getAverageGrade = students => {
-    const allGrades = extractGrades(students);
-    const allGradesFlat = flatten(allGrades);
-    return calculateAverage(allGradesFlat);
-};
+  };
+  
+  const extractGrades = students => students.map(student => student.grades);
+  
+  const getAverageGrade = students => {
+    return students.map(student => ({
+      name: student.name,
+      average: calculateAverage(student.grades)
+    }));
+  };
 
 const students = [
     { name: 'Lucas', grades: [80, 90, 70] },
