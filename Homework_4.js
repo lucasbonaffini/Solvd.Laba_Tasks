@@ -142,17 +142,35 @@ console.log('Target Account: ', targetAccount.formattedBalance);
 
 // * Task 4: Advanced Property Descriptors
 
+function deepClone(obj) {
+
+    const newObj = Array.isArray(obj) ? [] : {};
+
+    for (let key in obj) {
+        // Verificamos si la propiedad es un objeto anidado
+        if (typeof obj[key] === 'object' && obj[key] !== null) {
+
+            newObj[key] = deepClone(obj[key]);
+        } else {
+            
+            newObj[key] = obj[key];
+        }
+    }
+
+    return newObj;
+}
+
 function createImmutableObject(obj) {
     const immutableObj = {};
 
-    
     Object.keys(obj).forEach(key => {
-        
         if (typeof obj[key] === 'object' && obj[key] !== null) {
             
-            immutableObj[key] = createImmutableObject(obj[key]);
+            immutableObj[key] = Array.isArray(obj[key]) ? obj[key].slice() : deepClone(obj[key]);
+         
+            Object.defineProperty(immutableObj[key], 'length', { writable: false });
         } else {
-            
+        
             Object.defineProperty(immutableObj, key, {
                 value: obj[key],
                 writable: false,
@@ -165,13 +183,31 @@ function createImmutableObject(obj) {
     return immutableObj;
 }
 
+const originalObject = {
+    name: "Example Object",
+    details: {
+        numbers: [1, 2, 3]
+    }
+};
+
+const immutableObject = createImmutableObject(originalObject);
+console.log(immutableObject);
+
+immutableObject.name = "Changed Name"; 
+console.log(immutableObject);
+
+immutableObject.details.numbers[0] = 10; 
+console.log(immutableObject.details.numbers);
 
 
-const immutablePerson = createImmutableObject(person);
-console.log(immutablePerson);
 
-immutablePerson.firstName = "Jane";
-console.log(immutablePerson.firstName);
+
+
+
+
+
+
+
 
 // * Task 5: Object Observation
 
