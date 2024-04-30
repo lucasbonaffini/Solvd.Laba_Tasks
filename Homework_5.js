@@ -106,6 +106,7 @@ console.log("Intersection:", intersection);
 const union = getArrayUnion(array1, array2);
 console.log("Union:", union);
 
+// * Task 5: Array Performance Analysis
 
 
 // Function to measure performance of a provided function with an array
