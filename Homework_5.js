@@ -5,26 +5,36 @@ function customFilterUnique(array, callback) {
     const uniqueKeys = [];
     
     array.forEach(item => {
-        const key = callback(item);
-        if (!uniqueKeys.includes(key)) {
-            uniqueKeys.push(key);
-            uniqueArray.push(item);
+        const filteredItem = callback(item);
+        if (filteredItem !== undefined) {
+            const key = JSON.stringify(filteredItem);
+            if (!uniqueKeys.includes(key)) {
+                uniqueKeys.push(key);
+                uniqueArray.push(item);
+            }
         }
     });
     
     return uniqueArray;
 }
 
-// Example 
-const array = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 1, name: 'John' },
-    { id: 3, name: 'Bob' }
+// Example usage:
+let arrayOfObjects = [
+  { a: 1, b: 2 },
+  { a: 1, b: 2 },
+  { c: 3, d: 4 },
+  { a: 5, b: 6 },
+  { e: 7, f: 8 },
+  { g: 9, h: 0 }
 ];
 
-const uniqueObjects = customFilterUnique(array, obj => obj.id);
-console.log(uniqueObjects);
+const filterByPropertyA = (obj) => {
+  if (!obj || typeof obj !== "object") throw new Error("pass an object as parameter")
+  return Object.keys(obj).includes("a") ? obj : undefined
+}
+
+console.log(customFilterUnique(arrayOfObjects, filterByPropertyA));
+
 
 // * Task 2: Array Chunking
 
