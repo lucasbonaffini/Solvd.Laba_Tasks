@@ -124,3 +124,9 @@ Deadline: 2 May
 `Task 5: Array Performance Analysis`
 - Implement a function called measureArrayPerformance that takes a function and an array as arguments. The measureArrayPerformance function should execute the provided function with the given array as input and measure the execution time.
 - Use the measureArrayPerformance function to compare the performance of built-in array methods (map, filter, reduce, etc.) against your custom array manipulation functions.
+
+
+`Homework 6`
+Deadline: 7 May
+
+- to execute the code, I created an index.html file that can be opened with Live Server, to test all the functions, mainly those of exercises 4 and 5.
