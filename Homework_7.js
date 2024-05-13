@@ -41,30 +41,51 @@ promiseAll(promises)
 
 // * Task 2: Implement promiseAllSettled Function
 
-  function promiseAllSettled(promises) {
-    return Promise.all(promises.map(promise => {
-        return promise.then(value => {
-            return { status: 'fulfilled', value };
-        }).catch(reason => {
-            return { status: 'rejected', reason };
+function promiseAllSettled(promises) {
+    return new Promise(resolve => {
+        const results = [];
+        let settledCount = 0;
+
+        if (promises.length === 0) {
+            resolve(results);
+            return;
+        }
+
+        promises.forEach((promise, index) => {
+            promise.then(value => {
+                results[index] = { status: 'fulfilled', value };
+                settledCount++;
+
+                if (settledCount === promises.length) {
+                    resolve(results);
+                }
+            }).catch(reason => {
+                results[index] = { status: 'rejected', reason };
+                settledCount++;
+
+                if (settledCount === promises.length) {
+                    resolve(results);
+                }
+            });
         });
-    }));
+    });
 }
 
 // Example usage:
 const promises1 = [
-  Promise.resolve(1),
-  Promise.reject("Error occurred"),
-  Promise.resolve(3)
+    Promise.resolve(1),
+    Promise.reject("Error occurred"),
+    Promise.resolve(3)
 ];
 
 promiseAllSettled(promises1)
-  .then(results => {
-    console.log("All promises settled:", results);
-    // Expected: [{ status: 'fulfilled', value: 1 },
-    //            { status: 'rejected', reason: 'Error occurred' },
-    //            { status: 'fulfilled', value: 3 }]
-  });
+    .then(results => {
+        console.log("All promises settled:", results);
+        // Expected: [{ status: 'fulfilled', value: 1 },
+        //            { status: 'rejected', reason: 'Error occurred' },
+        //            { status: 'fulfilled', value: 3 }]
+    });
+
 
 // * Task 3: Implement Chaining of Promises as a Separate Function
 
