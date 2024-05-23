@@ -25,6 +25,6 @@
     Simulated adding books to the cart and placing orders.
     Demonstrated interactions between User, Cart, and Order objects.
 
-Link to Postman documentation with the uses of the different endpoints -> [text](https://documenter.getpostman.com/view/23335758/2sA3JRafMF)
+Link to Postman documentation with the functionalities of the different endpoints -> [doc](https://documenter.getpostman.com/view/23335758/2sA3JRafMF)
 
 Command 'node app.js' to execute the program
